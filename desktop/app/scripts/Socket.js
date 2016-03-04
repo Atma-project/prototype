@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import Cube from './objects/cube';
 
 export default class Socket {
   constructor() {
@@ -21,6 +22,16 @@ export default class Socket {
 
     this.socket.on('disconnect',() => {
       console.log('disconnect');
+    });
+
+    this.socket.on('click', function(data){
+      console.log(data);
+    });
+
+    this.socket.on('acceleration', function(data){
+      console.log(data);
+      let cube = new Cube();
+      cube.getCoord(data);
     });
   }
 }
