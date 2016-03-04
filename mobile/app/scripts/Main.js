@@ -10,7 +10,7 @@ import io from 'socket.io-client';
 export default class Main {
 
   connectToWebSocket () {
-    this.socket = io('http://169.254.207.110:3000');
+    this.socket = io('http://localhost:3000');
     console.log('connected to socket');
 
     window.addEventListener('devicemotion', (e) => {
@@ -21,6 +21,12 @@ export default class Main {
 
       // send data over the socket
       this.socket.emit('acceleration', {'x':x, 'y':y, 'z':z});
+    }, false);
+
+    window.addEventListener('click', (e) => {
+      console.log('click');
+
+      this.socket.emit('click', 'click');
     }, false);
   }
 }
