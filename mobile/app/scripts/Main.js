@@ -5,13 +5,22 @@
  * Take a look at http://browserify.org/ for more info
  */
 
+import io from 'socket.io-client';
+
 export default class Main {
-  constructor() {
 
-  }
+  connectToWebSocket () {
+    this.socket = io('http://169.254.207.110:3000');
+    console.log('connected to socket');
 
-  beep() {
-      console.log('beep');
-      console.log('beepbeep');
+    window.addEventListener('devicemotion', (e) => {
+      console.log(e);
+      var x = e.accelerationIncludingGravity.x;
+      var y = e.accelerationIncludingGravity.y;
+      var z = e.accelerationIncludingGravity.z;
+
+      // send data over the socket
+      this.socket.emit('acceleration', {'x':x, 'y':y, 'z':z});
+    }, false);
   }
 }
