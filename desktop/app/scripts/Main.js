@@ -7,10 +7,10 @@
 
 export default class Main {
   constructor() {
-
+    this.init();
   }
 
   init() {
-      console.log('init main');
+    console.log('init main');
   }
 }

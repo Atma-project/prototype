@@ -1,5 +1,5 @@
 import THREE from 'three';
-import Cube from './objects/Cube';
+import Cube from './objects/cube';
 import './utils/OrbitControls.js';
 
 export default class Webgl {
@@ -16,6 +16,9 @@ export default class Webgl {
 
     this.composer = null;
     this.initPostprocessing();
+
+    this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
+    this.camera.position.z = 100;
 
     this.cube = new Cube();
     this.cube.position.set(0, 0, 0);
