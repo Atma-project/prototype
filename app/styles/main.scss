@@ -1,0 +1,31 @@
+/**
+*
+* styles.styl
+* Here you can @import every files needed from
+* the different folders in styles
+* example : @import "folder/file";
+*
+**/
+
+//vendors
+@import "vendors/example";
+
+//utils
+@import "mixins/mixins";
+
+//config
+@import "config/colors";
+
+//base styles
+@import "base/reset";
+@import "base/typography";
+@import "base/base";
+
+//layout
+@import "layout/grid";
+
+//components
+@import "components/button";
+
+//pages
+@import "sections/home";

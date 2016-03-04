@@ -1,0 +1,50 @@
+{
+  "name": "starter-npm",
+  "version": "1.0.0",
+  "description": "A project starter using only npm scripts",
+  "main": "index.html",
+  "scripts": {
+    "clean:build": "rm -rf public/scripts/* & rm -rf public/styles/*",
+    "browsersync": "browser-sync start --server public --files './' --port 3000 --no-ui",
+    "js:dev": "watchify -d -t babelify -t aliasify -t stringify -g glslify app/scripts/app.js -o public/scripts/bundle.js",
+    "js:build": "browserify -t babelify -t aliasify -t stringify -g glslify app/scripts/app.js | uglifyjs -o public/scripts/bundle.js",
+    "styles:dev": "node-sass -w app/styles/ -o public/styles/ & npm run poststyles",
+    "styles:build": "node-sass --output-style compressed -w app/styles/ -o public/styles/ & npm run poststyles",
+    "poststyles": "postcss --use autoprefixer --autoprefixer.browsers 'last 2 versions' -o public/styles/main.css public/styles/main.css",
+    "start": "npm run styles:dev & npm run js:dev & npm run browsersync ",
+    "build": "npm run styles:build & npm run js:build & npm run browsersync"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeremieDrazic/starter-npm.git"
+  },
+  "author": "Jeremie Drazic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeremieDrazic/starter-npm/issues"
+  },
+  "homepage": "https://github.com/JeremieDrazic/starter-npm#readme",
+  "devDependencies": {
+    "aliasify": "*",
+    "babel-polyfill": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-stage-0": "*",
+    "babelify": "*",
+    "glslify": "*",
+    "glsl-noise": "*",
+    "browser-sync": "*",
+    "browserify": "*",
+    "node-sass": "*",
+    "autoprefixer": "*",
+    "postcss-cli": "*",
+    "postcss": "*",
+    "stringify": "*",
+    "uglifyjs": "*",
+    "watch": "*",
+    "watchify": "*"
+  },
+  "aliasify": {
+    "aliases": {}
+  }
+
+}
