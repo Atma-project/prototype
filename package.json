@@ -26,19 +26,23 @@
   "homepage": "https://github.com/JeremieDrazic/starter-npm#readme",
   "devDependencies": {
     "aliasify": "*",
+    "autoprefixer": "*",
     "babel-polyfill": "*",
     "babel-preset-es2015": "*",
     "babel-preset-stage-0": "*",
     "babelify": "*",
-    "glslify": "*",
-    "glsl-noise": "*",
     "browser-sync": "*",
     "browserify": "*",
+    "dat-gui": "*",
+    "glsl-noise": "*",
+    "glslify": "*",
     "node-sass": "*",
-    "autoprefixer": "*",
-    "postcss-cli": "*",
+    "orbit-controls": "^1.0.4",
     "postcss": "*",
+    "postcss-cli": "*",
+    "raf": "*",
     "stringify": "*",
+    "three": "*",
     "uglifyjs": "*",
     "watch": "*",
     "watchify": "*"
@@ -46,5 +50,4 @@
   "aliasify": {
     "aliases": {}
   }
-
 }

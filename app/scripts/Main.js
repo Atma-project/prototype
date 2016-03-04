@@ -10,8 +10,7 @@ export default class Main {
 
   }
 
-  beep() {
-      console.log('beep');
-      console.log('beepbeep');
+  init() {
+      console.log('init main');
   }
 }
