@@ -6,7 +6,7 @@ export default class Cube extends THREE.Object3D {
 
     this.geom = new THREE.BoxGeometry(10, 10, 10);
     this.mat = new THREE.MeshBasicMaterial({
-      color: 0x00ff00,
+      color: 0x323FEF,
       wireframe: true,
     });
     this.mesh = new THREE.Mesh(this.geom, this.mat);
@@ -15,7 +15,6 @@ export default class Cube extends THREE.Object3D {
   }
 
   update() {
-    console.log('ok');
     this.rotation.x += 0.01;
     this.rotation.z += 0.01;
   }

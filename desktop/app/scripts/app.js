@@ -14,11 +14,10 @@ import App from './Main';
 import Const from './utils/Const';
 
 let app = new App();
+app.init();
 
 let webgl;
 let gui;
-
-app.init();
 
 // webgl settings
 webgl = new Webgl(window.innerWidth, window.innerHeight);
