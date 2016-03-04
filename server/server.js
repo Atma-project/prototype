@@ -15,8 +15,13 @@ io.on('connection', function(socket) {
   });
 
   socket.on('acceleration', function(data){
-    // console.log(data);
+    console.log(data);
     io.emit('acceleration', data);
+  });
+
+  socket.on('click', function(data){
+    console.log(data);
+    io.emit('click', data);
   });
 
 });
