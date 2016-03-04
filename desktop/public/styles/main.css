@@ -99,3 +99,5 @@ table {
 * pages/home.scss
 *
 **/
+canvas {
+  position: absolute; }
