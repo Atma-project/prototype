@@ -11,8 +11,16 @@ export default class Socket {
   }
 
   init(){
-    this.socket.on( 'newConnection', ( data ) => {
-      console.log( 'Connected' )
-    })
+    this.socket.on('newConnection', (data) => {
+      console.log('Connected');
+    });
+
+    this.socket.on('event', (data) => {
+      console.log('event');
+    });
+
+    this.socket.on('disconnect',() => {
+      console.log('disconnect');
+    });
   }
 }
