@@ -21,9 +21,9 @@ export default class Socket {
     });
 
     window.addEventListener('devicemotion', (e) => {
-      var x = e.accelerationIncludingGravity.x;
-      var y = e.accelerationIncludingGravity.y;
-      var z = e.accelerationIncludingGravity.z;
+      var x = e.acceleration.x;
+      var y = e.acceleration.y;
+      var z = e.acceleration.z;
 
       this.socket.emit('acceleration', {'x':x, 'y':y, 'z':z});
     }, false);
