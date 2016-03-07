@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "express": "*",
+    "gsap": "^1.18.2",
     "socket.io": "*",
     "socket.io-client": "*"
   }

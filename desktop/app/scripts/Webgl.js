@@ -1,6 +1,7 @@
 import THREE from 'three';
 import Cube from './objects/cube';
 import './utils/OrbitControls.js';
+import 'gsap';
 
 export default class Webgl {
   constructor(width, height) {

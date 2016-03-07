@@ -1,11 +1,13 @@
 import io from 'socket.io-client';
 import Cube from './objects/cube';
+let cube = new Cube();
 
 export default class Socket {
   constructor() {
     console.log('socket');
 
-    this.host = 'http://169.254.128.122:3000';
+    // this.host = 'http://169.254.128.122:3000';
+    this.host = 'http://172.18.33.87:3000';
     this.socket = io( this.host );
 
     this.init();
@@ -25,13 +27,13 @@ export default class Socket {
     });
 
     this.socket.on('click', function(data){
-      console.log(data);
+      //console.log(data);
+      cube.getClick(data);
     });
 
     this.socket.on('acceleration', function(data){
       // console.log(data);
-      let cube = new Cube();
-      cube.getCoord(data);
+      //cube.getCoord(data);
     });
   }
 }

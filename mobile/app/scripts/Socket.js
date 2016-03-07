@@ -4,7 +4,8 @@ export default class Socket {
   constructor() {
     console.log('socket');
 
-    this.host = 'http://169.254.128.122:3000';
+    // this.host = 'http://169.254.128.122:3000';
+    this.host = 'http://172.18.33.87:3000';
     this.socket = io( this.host );
 
     this.init();
