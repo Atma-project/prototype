@@ -35,7 +35,8 @@
     "stringify": "*",
     "uglifyjs": "*",
     "watch": "*",
-    "watchify": "*"
+    "watchify": "*",
+    "socket.io-client": "*"
   },
   "aliasify": {
     "aliases": {}
