@@ -1,31 +1,33 @@
-/**
- * scripts/main.js
- *
- * This is a sample CommonJS module.
- * Take a look at http://browserify.org/ for more info
- */
-
 import io from 'socket.io-client';
 
-export default class Main {
+export default class Socket {
+  constructor() {
+    console.log('socket');
 
-  connectToWebSocket () {
-    this.socket = io('http://localhost:3000');
-    console.log('connected to socket');
+    this.host = 'http://169.254.128.122:3000';
+    this.socket = io( this.host );
+
+    this.init();
+  }
+
+  init(){
+    this.socket.on('newConnection', (data) => {
+      console.log('Connected');
+    });
+
+    this.socket.on('disconnect',() => {
+      console.log('disconnect');
+    });
 
     window.addEventListener('devicemotion', (e) => {
-      console.log(e);
       var x = e.accelerationIncludingGravity.x;
       var y = e.accelerationIncludingGravity.y;
       var z = e.accelerationIncludingGravity.z;
 
-      // send data over the socket
       this.socket.emit('acceleration', {'x':x, 'y':y, 'z':z});
     }, false);
 
     window.addEventListener('click', (e) => {
-      console.log('click');
-
       this.socket.emit('click', 'click');
     }, false);
   }
