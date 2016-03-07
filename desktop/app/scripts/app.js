@@ -10,11 +10,8 @@ import Webgl from './Webgl';
 import raf from 'raf';
 import dat from 'dat-gui';
 import Const from './utils/Const';
-import Main from './Main';
 import Socket from './Socket';
 
-// main js
-let main = new Main();
 
 // new socket
 let socket = new Socket();

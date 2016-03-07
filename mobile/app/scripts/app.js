@@ -6,9 +6,7 @@
  * See https://babeljs.io/docs/learn-es2015/ for info on ES6
  */
 
-import App from './Main';
-import Const from './utils/Const';
+import Socket from './Socket';
 
-let app = new App();
-
-app.connectToWebSocket();
+// new socket
+let socket = new Socket();
