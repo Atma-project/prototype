@@ -23,6 +23,7 @@ export default class Webgl {
 
     this.cube = new Cube();
     this.cube.position.set(0, 0, 0);
+    this.cube.scale.set(0.01, 0.01, 0.01);
     this.scene.add(this.cube);
 
     this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);

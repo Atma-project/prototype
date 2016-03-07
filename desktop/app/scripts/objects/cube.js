@@ -57,7 +57,7 @@ export default class Cube extends THREE.Object3D {
     var self = this;
 
     this.loader = new THREE.OBJLoader( this.manager );
-    this.loader.load( './assets/3d/flake.obj', function ( object ) {
+    this.loader.load( './assets/3d/heart.obj', function ( object ) {
       loadedObject = object;
 
       object.traverse( function ( child ) {
@@ -77,7 +77,7 @@ export default class Cube extends THREE.Object3D {
 
     if (clickedData) {
       TweenMax.to(material.uniforms.ice, 1, {value: 10.0, ease: Power2.easeOut});
-      TweenMax.to(material.uniforms.space, 1, {value: 5.0, ease: Power2.easeOut});
+      TweenMax.to(material.uniforms.space, 1, {value: 500.0, ease: Power2.easeOut});
     } else {
       TweenMax.to(material.uniforms.ice, 1, {value: 0.0, ease: Power2.easeOut});
       TweenMax.to(material.uniforms.space, 1, {value: 0.0, ease: Power2.easeOut});
@@ -101,6 +101,10 @@ export default class Cube extends THREE.Object3D {
       // this.rotation.x = coord.y / 10;
       // this.rotation.y = -coord.x / 10;
 
+    }
+    if (loadedObject) {
+      loadedObject.rotation.x += 0.001;
+      loadedObject.rotation.y += 0.001;
     }
   }
 }
