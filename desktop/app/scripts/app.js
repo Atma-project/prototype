@@ -23,6 +23,11 @@ document.body.appendChild(webgl.renderer.domElement);
 //GUI settings
 let gui = new dat.GUI();
 gui.add(webgl.params, 'usePostprocessing');
+// gui.add(webgl.vignette.params, 'boost' ).min(0).max(10);
+// gui.add(webgl.vignette.params, 'reduction' ).min(0).max(10);
+//
+// gui.add(webgl.bloomPass.params, 'blendMode' ).min(0).max(10);
+// gui.add(webgl.bloomPass.params, 'blurAmount' ).min(0).max(10);
 
 // handle resize
 window.addEventListener('resize', resizeHandler);

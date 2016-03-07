@@ -47,6 +47,7 @@
     "aliases": {}
   },
   "dependencies": {
+    "@superguigui/wagner": "^0.1.17",
     "express": "*",
     "gsap": "^1.18.2",
     "socket.io": "*",

@@ -3,6 +3,11 @@ import Cube from './objects/cube';
 import './utils/OrbitControls.js';
 import 'gsap';
 
+import WAGNER from '@superguigui/wagner';
+import VignettePass from '@superguigui/wagner/src/passes/vignette/VignettePass';
+import MultiPassBloomPass from '@superguigui/wagner/src/passes/bloom/MultiPassBloomPass';
+import FXAAPass from '@superguigui/wagner/src/passes/fxaa/FXAAPass';
+
 export default class Webgl {
   constructor(width, height) {
     this.params = {
@@ -13,7 +18,7 @@ export default class Webgl {
 
     this.renderer = new THREE.WebGLRenderer({antialiasing: true});
     this.renderer.setSize(width, height);
-    this.renderer.setClearColor(0xB6DCFE);
+    this.renderer.setClearColor(0xFFFCF7);
 
     this.composer = null;
     this.initPostprocessing();
@@ -30,8 +35,19 @@ export default class Webgl {
   }
 
   initPostprocessing() {
-    if (!this.params.usePostprocessing) { return; }
-    /* Add the effect composer of your choice */
+    if (this.params.usePostprocessing) {
+       this.composer = new WAGNER.Composer(this.renderer);
+
+       this.vignette = new VignettePass();
+       this.vignette.params.boost = 1.1;
+       this.vignette.params.reduction = 0.54;
+
+       this.bloomPass = new MultiPassBloomPass();
+       this.bloomPass.params.blendMode = 6.8;
+       this.bloomPass.params.blurAmount = 1.4;
+
+       this.fxaa = new FXAAPass();
+    }
   }
 
   resize(width, height) {
@@ -47,7 +63,15 @@ export default class Webgl {
 
   render(e) {
     if (this.params.usePostprocessing) {
-      console.warn('WebGL - No effect composer set.');
+      this.renderer.autoClearColor = true;
+      this.composer.reset();
+      this.composer.render(this.scene, this.camera);
+
+      this.composer.pass(this.vignette);
+      this.composer.pass(this.bloomPass);
+      this.composer.pass(this.fxaa);
+
+      this.composer.toScreen();
     } else {
       this.renderer.render(this.scene, this.camera);
     }

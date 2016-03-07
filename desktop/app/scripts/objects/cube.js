@@ -31,7 +31,7 @@ export default class Cube extends THREE.Object3D {
         uniforms: {
             tSnow: {
                 type: "t",
-                value: THREE.ImageUtils.loadTexture( './assets/images/texture.jpg' )
+                value: THREE.ImageUtils.loadTexture( './assets/images/test1.jpg' )
             },
             time: {
                 type: "f",
@@ -76,7 +76,7 @@ export default class Cube extends THREE.Object3D {
     clickedData ^= true;
 
     if (clickedData) {
-      TweenMax.to(material.uniforms.ice, 1, {value: 10.0, ease: Power2.easeOut});
+      TweenMax.to(material.uniforms.ice, 1, {value: 5.0, ease: Power2.easeOut});
       TweenMax.to(material.uniforms.space, 1, {value: 500.0, ease: Power2.easeOut});
     } else {
       TweenMax.to(material.uniforms.ice, 1, {value: 0.0, ease: Power2.easeOut});
@@ -85,18 +85,31 @@ export default class Cube extends THREE.Object3D {
   }
 
   getCoord(data) {
-    // console.log(data.x);
+    //console.log(data.x);
     coord = data;
   }
 
   update() {
     material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
-    // this.rotation.x += 0.01;
-    // this.rotation.z += 0.01;
+    this.rotation.y += 0.01;
+    this.rotation.x += 0.0001;
+
     //console.log(coord.x)
     if(coord) {
       // this.position.x = coord.x * 10;
       // this.position.y = -coord.y * 10;
+
+      TweenMax.to(this.position, 1, {x: (-coord.x * 10), ease: Power2.easeOut});
+      TweenMax.to(this.position, 1, {y: (coord.y * 10), ease: Power2.easeOut});
+      TweenMax.to(this.position, 1, {z: (-coord.z * 10), ease: Power2.easeOut});
+
+
+      // if (coord.z > 4 ) {
+      //   console.log('BOOOOM');
+      //   this.getClick();
+      // }
+
+      //console.log('x', coord.x ,'y', coord.y, 'z', coord.z);
 
       // this.rotation.x = coord.y / 10;
       // this.rotation.y = -coord.x / 10;

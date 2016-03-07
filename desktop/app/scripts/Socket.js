@@ -33,7 +33,7 @@ export default class Socket {
 
     this.socket.on('acceleration', function(data){
       // console.log(data);
-      //cube.getCoord(data);
+      cube.getCoord(data);
     });
   }
 }
