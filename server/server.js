@@ -21,6 +21,7 @@ io.on('connection', function(socket) {
     data.z = Math.round(data.z);
 
     // console.log(data);
+    // 
 
     io.emit('acceleration', data);
   });
