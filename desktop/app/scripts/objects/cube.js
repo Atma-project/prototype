@@ -3,6 +3,7 @@ import '../utils/OBJLoader.js';
 const glslify = require('glslify');
 let start = Date.now();
 let coord = null;
+let accel = null;
 let clickedData = null;
 let loadedObject;
 let material;
@@ -89,6 +90,11 @@ export default class Cube extends THREE.Object3D {
     coord = data;
   }
 
+  getAccel(data) {
+    //console.log(data.x);
+    accel = data;
+  }
+
   update() {
     material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
     this.rotation.y += 0.01;
@@ -96,12 +102,17 @@ export default class Cube extends THREE.Object3D {
 
     //console.log(coord.x)
     if(coord) {
+        console.log(coord.gamma)
       // this.position.x = coord.x * 10;
       // this.position.y = -coord.y * 10;
 
-      TweenMax.to(this.position, 1, {x: (-coord.x * 10), ease: Power2.easeOut});
-      TweenMax.to(this.position, 1, {y: (coord.y * 10), ease: Power2.easeOut});
-      TweenMax.to(this.position, 1, {z: (-coord.z * 10), ease: Power2.easeOut});
+    //   TweenMax.to(this.position, 1, {x: (-coord.x * 10), ease: Power2.easeOut});
+    //   TweenMax.to(this.position, 1, {y: (coord.y * 10), ease: Power2.easeOut});
+    //   TweenMax.to(this.position, 1, {z: (-coord.z * 10), ease: Power2.easeOut});
+
+    // TweenMax.to(this.position, 1, {x: (coord.gamma * 0.5), ease: Power2.easeOut});
+    // TweenMax.to(this.position, 1, {y: (coord.alpha * 0.05), ease: Power2.easeOut});
+    TweenMax.to(this.position, 1, {z: (coord.beta), ease: Power2.easeOut});
 
 
       // if (coord.z > 4 ) {

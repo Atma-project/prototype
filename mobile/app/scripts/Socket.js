@@ -5,7 +5,7 @@ export default class Socket {
     console.log('socket');
 
     // this.host = 'http://169.254.128.122:3000';
-    this.host = 'http://172.18.33.87:3000';
+    this.host = 'http://172.18.34.209:3000';
     this.socket = io( this.host );
 
     this.init();
@@ -19,6 +19,21 @@ export default class Socket {
     this.socket.on('disconnect',() => {
       console.log('disconnect');
     });
+
+    window.addEventListener('deviceorientation', (e) => {
+
+        if (e.absolute)
+            console.log("référentiel terrestre");
+        else
+            console.log("référentiel appareil")
+
+        var alpha = e.alpha;
+        var beta = e.beta;
+        var gamma = e.gamma;
+
+        this.socket.emit('orientation', {'alpha':alpha, 'beta':beta, 'gamma':gamma});
+    });
+    
 
     window.addEventListener('devicemotion', (e) => {
       var x = e.acceleration.x;

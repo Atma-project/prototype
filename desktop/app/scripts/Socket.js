@@ -7,7 +7,7 @@ export default class Socket {
     console.log('socket');
 
     // this.host = 'http://169.254.128.122:3000';
-    this.host = 'http://172.18.33.87:3000';
+    this.host = 'http://172.18.34.209:3000';
     this.socket = io( this.host );
 
     this.init();
@@ -32,6 +32,11 @@ export default class Socket {
     });
 
     this.socket.on('acceleration', function(data){
+      // console.log(data);
+      cube.getAccel(data);
+    });
+
+    this.socket.on('orientation', function(data){
       // console.log(data);
       cube.getCoord(data);
     });

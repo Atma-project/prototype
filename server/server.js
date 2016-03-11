@@ -21,6 +21,11 @@ io.on('connection', function(socket) {
     io.emit('acceleration', data);
   });
 
+  socket.on('orientation', function(data){
+    console.log(data);
+    io.emit('orientation', data);
+  });
+
   socket.on('click', function(data){
     console.log(data);
     io.emit('click', data);
