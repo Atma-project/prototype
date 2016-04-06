@@ -33,7 +33,7 @@ export default class Socket {
 
         this.socket.emit('orientation', {'alpha':alpha, 'beta':beta, 'gamma':gamma});
     });
-    
+
 
     window.addEventListener('devicemotion', (e) => {
       var x = e.acceleration.x;

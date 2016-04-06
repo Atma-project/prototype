@@ -7,6 +7,8 @@
  */
 
 import Socket from './Socket';
+import Space from './Space';
 
 // new socket
-let socket = new Socket();
+// let socket = new Socket();
+let space = new Space();

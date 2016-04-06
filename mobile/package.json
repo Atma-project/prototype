@@ -40,6 +40,9 @@
   },
   "aliasify": {
     "aliases": {}
+  },
+  "dependencies": {
+    "spacebro": "^0.1.9",
+    "spacebro-client": "0.0.11"
   }
-
 }
