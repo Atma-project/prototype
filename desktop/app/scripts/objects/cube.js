@@ -40,7 +40,7 @@ export default class Cube extends THREE.Object3D {
             },
             move: {
               type: "f",
-              value: 0.0
+              value: 10.0
             },
             ice: {
               type: "f",
@@ -48,7 +48,7 @@ export default class Cube extends THREE.Object3D {
             },
             space: {
               type: "f",
-              value: 0.0
+              value: 10.0
             }
         },
         vertexShader: glslify('../shaders/vertex.glsl'),
@@ -58,7 +58,7 @@ export default class Cube extends THREE.Object3D {
     var self = this;
 
     this.loader = new THREE.OBJLoader( this.manager );
-    this.loader.load( './assets/3d/heart.obj', function ( object ) {
+    this.loader.load( './assets/3d/algue.obj', function ( object ) {
       loadedObject = object;
 
       object.traverse( function ( child ) {
@@ -97,8 +97,8 @@ export default class Cube extends THREE.Object3D {
 
   update() {
     material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
-    this.rotation.y += 0.01;
-    this.rotation.x += 0.0001;
+    // this.rotation.y += 0.01;
+    // this.rotation.x += 0.0001;
 
     //console.log(coord.x)
     if(coord) {
