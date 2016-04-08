@@ -1,5 +1,6 @@
 import THREE from 'three';
 import '../utils/OBJLoader.js';
+import '../utils/ColladaLoader.js';
 const glslify = require('glslify');
 let start = Date.now();
 let coord = null;
@@ -7,70 +8,108 @@ let accel = null;
 let clickedData = null;
 let loadedObject;
 let material;
+import dat from 'dat-gui';
 
 export default class Cube extends THREE.Object3D {
-  constructor() {
+  constructor(cubemap) {
     super();
 
-    this.manager = new THREE.LoadingManager();
-    this.manager.onProgress = function ( item, loaded, total ) {
-      console.log( item, loaded, total );
-    };
+    // this.manager = new THREE.LoadingManager();
+    // this.manager.onProgress = function ( item, loaded, total ) {
+    //   console.log( item, loaded, total );
+    // };
+    //
+    // this.manager.onProgress = function ( xhr ) {
+    //   if ( xhr.lengthComputable ) {
+    //     var percentComplete = xhr.loaded / xhr.total * 100;
+    //     console.log( Math.round(percentComplete, 2) + '% downloaded' );
+    //   }
+    // };
+    //
+    // this.manager.onError = function ( xhr ) {
+    //   console.log('error');
+    // };
 
-    this.manager.onProgress = function ( xhr ) {
-      if ( xhr.lengthComputable ) {
-        var percentComplete = xhr.loaded / xhr.total * 100;
-        console.log( Math.round(percentComplete, 2) + '% downloaded' );
-      }
-    };
-
-    this.manager.onError = function ( xhr ) {
-      console.log('error');
-    };
+    // material = new THREE.MeshPhongMaterial({
+    //   color: 0xABABAB,
+    //   emissive: 0x000000,
+    //   specular: 0x000000,
+    //   shininess: 50,
+    //   envMap: cubemap,
+    //   reflectivity: 1,
+    //   emissiveIntensity: 1,
+    //   side: THREE.DoubleSide,
+    //   shading: THREE.SmoothShading
+    // });
 
     material = new THREE.ShaderMaterial( {
-        uniforms: {
-            tSnow: {
-                type: "t",
-                value: THREE.ImageUtils.loadTexture( './assets/images/test1.jpg' )
-            },
-            time: {
-                type: "f",
-                value: 0.0
-            },
-            move: {
-              type: "f",
-              value: 10.0
-            },
-            ice: {
-              type: "f",
-              value: 0.0
-            },
-            space: {
-              type: "f",
-              value: 10.0
-            }
-        },
+        // uniforms: {
+        //     tSnow: {
+        //         type: "t",
+        //         value: THREE.ImageUtils.loadTexture( './assets/images/test1.jpg' )
+        //     },
+        //     time: {
+        //         type: "f",
+        //         value: 0.0
+        //     },
+        //     move: {
+        //       type: "f",
+        //       value: 100.0
+        //     },
+        //     ice: {
+        //       type: "f",
+        //       value: 100.0
+        //     },
+        //     space: {
+        //       type: "f",
+        //       value: 10.0
+        //     }
+        // },
         vertexShader: glslify('../shaders/vertex.glsl'),
         fragmentShader: glslify('../shaders/fragment.glsl')
     });
 
+    // let gui = new dat.GUI();
+    // gui.add(material.uniforms.time, 'value').min(0).max(10);
+
     var self = this;
 
-    this.loader = new THREE.OBJLoader( this.manager );
-    this.loader.load( './assets/3d/algue.obj', function ( object ) {
-      loadedObject = object;
+    this.loader = new THREE.ColladaLoader();
+    this.loader.load(
+    	'./assets/3d/algue.dae',
+    	function ( collada ) {
+        collada.scene.traverse( function ( child ) {
+          if ( child instanceof THREE.Mesh ) {
+            child.material = material;
+            child.geometry.computeVertexNormals();
+          }
+        })
+        //self.add( collada.scene );
+    	}
+    );
 
-      object.traverse( function ( child ) {
-        if ( child instanceof THREE.Mesh ) {
-          child.material = material;
-          child.material.uniforms.needsUpdate = true;
-          child.geometry = new THREE.Geometry().fromBufferGeometry( child.geometry );
-          child.geometry.verticesNeedUpdate = true;
-        }
-      });
-      self.add(loadedObject);
-    }, this.manager.onProgress, this.manager.onError );
+    // this.loader = new THREE.OBJLoader( this.manager );
+    // this.loader.load( './assets/3d/algue.obj', function ( object ) {
+    //   loadedObject = object;
+    //
+    //   object.traverse( function ( child ) {
+    //     if ( child instanceof THREE.Mesh ) {
+    //       child.material = material;
+    //       // child.material.uniforms.needsUpdate = true;
+    //       child.geometry = new THREE.Geometry().fromBufferGeometry( child.geometry );
+    //       console.log(child.geometry);
+    //       child.geometry.computeVertexNormals();
+    //       // child.geometry.verticesNeedUpdate = true;
+    //     }
+    //   });
+    //   self.add(loadedObject);
+    // }, this.manager.onProgress, this.manager.onError );
+
+
+
+    var geometry = new THREE.CylinderGeometry( 1, 5, 34, 32 );
+    var cylinder = new THREE.Mesh( geometry, material );
+    this.add( cylinder );
   }
 
   getClick(data) {
@@ -96,7 +135,8 @@ export default class Cube extends THREE.Object3D {
   }
 
   update() {
-    material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
+    //this.wave();
+    // material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
     // this.rotation.y += 0.01;
     // this.rotation.x += 0.0001;
 
